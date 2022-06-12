@@ -3,6 +3,15 @@
   const selectIndex = ref(-1);
   const isOpen = ref(false);
 
+  const search = ref(null);
+
+  defineProps({
+    initialize: {
+      default: null,
+    },
+    tabindex: { default: 0 },
+  });
+
   const onToggle = () => {
     console.log("aqui estoy");
     if (isOpen.value) {
@@ -12,8 +21,18 @@
     }
   };
 
+  const onKey = (e) => {
+    const KeyCode = e.KeyCode || e.which;
+    if (!e.shiftKey && KeyCode !== 9 && !isOpen.value) {
+      open();
+    }
+  };
+
   const open = () => {
     isOpen.value = true;
+    nextTick(() => {
+      search.value.focus();
+    });
   };
 
   const onMouse = (index) => {
@@ -23,13 +42,14 @@
   console.log(isOpen.value);
 </script>
 <template>
-  <button class="px-2 py-1 border" @click="onToggle">
-    hacer click {{ isOpen }}
-  </button>
   <div class="relative block bg-white" :class="[isOpen ? ' border-b-0' : '']">
     <div class="relative">
       <div
         class="bg-white px-2 py-1 border border-gray-100 shadow-sm cursor-pointer select-none flex justify-between leading-[15px]"
+        :tabindex="tabindex"
+        ref="toggle"
+        @click="onToggle"
+        @keydown="onKey"
       >
         <span>Escribe Aqui</span>
       </div>
@@ -43,6 +63,9 @@
             type="text"
             placeholder="typehead"
             class="leading-4 text-sm bg-gray-200 rounded-sm px-2 py-1 w-full block focus:outline-1 focus:outline-dotted focus:outline-offset-1"
+            autocomplete="off"
+            ref="search"
+            @blur="onBlur"
           />
         </div>
         <ul class="block m-0 p-0">
