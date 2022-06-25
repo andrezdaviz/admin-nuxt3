@@ -1,11 +1,14 @@
 <script setup>
+
+
   const results = ["uno", "dos", "tres"];
   const selectIndex = ref(-1);
   const isOpen = ref(false);
+  const selected = ref(null)
 
   const search = ref(null);
 
-  defineProps({
+  const {initialize, tabindex} = defineProps({
     initialize: {
       default: null,
     },
@@ -28,6 +31,10 @@
     }
   };
 
+  const close = () => {
+    isOpen.value = false
+    selectIndex.value = -1
+  }
   const open = () => {
     isOpen.value = true;
     nextTick(() => {
@@ -38,6 +45,13 @@
   const onMouse = (index) => {
     selectIndex.value = index;
   };
+
+  const select = (result) => {
+    selected.value = result
+    close()
+  }
+
+  const selectedText =  computed(() => selected.value ? selected.value : 'Escribir Algooo')
 
   console.log(isOpen.value);
 </script>
@@ -51,11 +65,11 @@
         @click="onToggle"
         @keydown="onKey"
       >
-        <span>Escribe Aqui</span>
+        {{selectedText}}
       </div>
 
       <div
-        class="transition ease-in-out duration-300 w-full absolute z-50 p-1 bg-white border-r border-l border-gray-100 shadow-md"
+        class="transition ease-in-out duration-300 w-full absolute z-50 p-1 bg-white border-r border-l border-gray-100 shadow"
         v-if="isOpen"
       >
         <div class="relative">
@@ -73,7 +87,8 @@
             <a
               class="cursor-pointer block p-[2px] bg-white"
               :class="selectIndex === index ? 'bg-gray-500 text-white' : ''"
-              @mouseover.prevent="onMouse(index)"
+              @mousedown.prevent="select(result)"
+                @mouseover.prevent="onMouse(index)"
             >
               {{ result }}
             </a>
