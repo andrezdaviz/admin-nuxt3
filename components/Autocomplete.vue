@@ -24,12 +24,37 @@
     }
   };
 
+ const onBlur = () => {
+  close()
+ }
+
   const onKey = (e) => {
     const KeyCode = e.KeyCode || e.which;
     if (!e.shiftKey && KeyCode !== 9 && !isOpen.value) {
       open();
     }
   };
+
+  const onEsc = () => {
+    console.log("esc")
+    close()
+  }
+
+  const onDownKey = (e) => {
+    results.length -1 > selectIndex ? selectIndex-- :''
+  }
+
+  const onUpKey = () => {
+    selectIndex > 0 ? selectIndex-- : ''
+  }
+
+  const onEnterKey = () => {
+    const found = results.value[selectIndex.value]
+
+    console.log(found)
+
+     found ? select(found) : ''
+  }
 
   const close = () => {
     isOpen.value = false
@@ -43,6 +68,7 @@
   };
 
   const onMouse = (index) => {
+    console.log(index)
     selectIndex.value = index;
   };
 
@@ -59,7 +85,7 @@
   <div class="relative block bg-white" :class="[isOpen ? ' border-b-0' : '']">
     <div class="relative">
       <div
-        class="bg-white px-2 py-1 border border-gray-100 shadow-sm cursor-pointer select-none flex justify-between leading-[15px]"
+        class="bg-white pt-2 pb-1 px-3 border border-gray-100 shadow cursor-pointer select-none flex justify-between text-base "
         :tabindex="tabindex"
         ref="toggle"
         @click="onToggle"
@@ -76,19 +102,24 @@
           <input
             type="text"
             placeholder="typehead"
-            class="leading-4 text-sm bg-gray-200 rounded-sm px-2 py-1 w-full block focus:outline-1 focus:outline-dotted focus:outline-offset-1"
+            class="text-sm text-gray-800 bg-gray-200 rounded px-3 py-2 w-full block focus:outline-1 focus:outline-dotted focus:outline-offset-1"
             autocomplete="off"
             ref="search"
             @blur="onBlur"
+            @keydown.esc="onEsc"
+              @keydown.up="onUpKey"
+              @keydown.down="onDownKey"
+              @keydown.enter="onEnterKey"
+              @keyup.enter="onEnterKey"
           />
         </div>
-        <ul class="block m-0 p-0">
+        <ul class="block p-1">
           <li class="block mb-[2px]" v-for="(result, index) in results">
             <a
-              class="cursor-pointer block p-[2px] bg-white"
+              class="cursor-pointer block p-2 bg-white rounded-sm"
               :class="selectIndex === index ? 'bg-gray-500 text-white' : ''"
               @mousedown.prevent="select(result)"
-                @mouseover.prevent="onMouse(index)"
+              @mouseover.prevent="onMouse(index)"
             >
               {{ result }}
             </a>

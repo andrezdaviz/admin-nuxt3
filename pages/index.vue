@@ -1,7 +1,7 @@
 <script setup>
-  const state = useMainStore();
+  // const state = useMainStore();
 
-  state.getItemsSelect();
+  // state.getItemsSelect();
 </script>
 
 <template>
