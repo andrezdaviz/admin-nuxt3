@@ -7,4 +7,6 @@
 <template>
   <h1 class="font-bold text-gray-600">Hello, Tailwind 3!</h1>
   <Autocomplete> </Autocomplete>
+
+  <BaseInput/>
 </template>
