@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class=" antialiased min-h-screen">
     Default layout
     <slot />
   </div>
