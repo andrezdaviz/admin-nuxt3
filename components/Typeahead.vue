@@ -104,10 +104,10 @@
   );
 </script>
 <template>
-  <div class="relative block bg-white" :class="[isOpen ? ' border-b-0' : '']">
+  <div class="relative block bg-slate-700 rounded" :class="[isOpen ? ' border-b-0' : '']">
     <div class="relative">
       <div
-        class="bg-white pt-2 pb-1 px-3 border border-gray-100 shadow cursor-pointer select-none flex justify-between text-base"
+        class=" bg-slate-600 text-white py-2 px-3  shadow cursor-pointer select-none flex justify-between text-semibold"
         :tabindex="tabindex"
         ref="toggle"
         @click="onToggle"
@@ -117,7 +117,7 @@
       </div>
 
       <div
-        class="absolute z-50 w-full p-1 transition duration-300 ease-in-out bg-white border-l border-r border-gray-100 shadow"
+        class="absolute z-50 w-full p-1 transition duration-300 ease-in-out bg-slate-700 border-l border-r border-gray-100 shadow"
         v-if="isOpen"
       >
         <div class="relative">
