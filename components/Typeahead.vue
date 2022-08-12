@@ -138,7 +138,7 @@
         <ul class="block p-1">
           <li class="block mb-[2px]" v-for="(result, index) in results.results">
             <a
-              class="cursor-pointer block text-white p-2 bg-gray-500 rounded-sm"
+              class="cursor-pointer block text-white p-cd admin2 bg-gray-500 rounded-sm"
               :class="selectIndex === index ? 'bg-slate-800' : ''"
               @mousedown.prevent="select(result)"
               @mouseover.prevent="onMouse(index)"
