@@ -1,22 +1,22 @@
 <script setup>
-
-
-  const results = ["uno", "dos", "tres"];
+  const results = ref([]);
   const selectIndex = ref(-1);
   const isOpen = ref(false);
-  const selected = ref(null)
+  const selected = ref(null);
 
   const search = ref(null);
 
-  const {initialize, tabindex} = defineProps({
+  const { initialize, tabindex, url } = defineProps({
     initialize: {
       default: null,
     },
+    url: { required: true },
     tabindex: { default: 0 },
   });
 
+  const emit = defineEmits(["input"]);
+
   const onToggle = () => {
-    console.log("aqui estoy");
     if (isOpen.value) {
       isOpen.value = false;
     } else {
@@ -24,9 +24,9 @@
     }
   };
 
- const onBlur = () => {
-  close()
- }
+  const onBlur = () => {
+    close();
+  };
 
   const onKey = (e) => {
     const KeyCode = e.KeyCode || e.which;
@@ -36,31 +36,34 @@
   };
 
   const onEsc = () => {
-    console.log("esc")
-    close()
-  }
+    // console.log("esc");
+    close();
+  };
 
   const onDownKey = (e) => {
-    results.length -1 > selectIndex ? selectIndex-- :''
-  }
+    results.value.length - 1 > selectIndex.value ? selectIndex.value-- : "";
+  };
 
   const onUpKey = () => {
-    selectIndex > 0 ? selectIndex-- : ''
-  }
+    selectIndex.value > 0 ? selectIndex.value-- : "";
+  };
 
   const onEnterKey = () => {
-    const found = results.value[selectIndex.value]
+    const found = results.value[selectIndex.value];
 
-    console.log(found)
+    //console.log(found);
 
-     found ? select(found) : ''
-  }
+    found ? select(found) : "";
+  };
 
   const close = () => {
-    isOpen.value = false
-    selectIndex.value = -1
-  }
+    results.value = [];
+    isOpen.value = false;
+    search.value = null;
+    selectIndex.value = -1;
+  };
   const open = () => {
+    fetchData("");
     isOpen.value = true;
     nextTick(() => {
       search.value.focus();
@@ -68,30 +71,48 @@
   };
 
   const onMouse = (index) => {
-    console.log(index)
     selectIndex.value = index;
   };
 
   const select = (result) => {
-    selected.value = result
-    close()
-  }
+    emit("input", { target: { value: result } });
+    close();
+  };
 
-  const selectedText =  computed(() => selected.value ? selected.value : 'Escribir Algooo')
+  const fetchData = async (q) => {
+    const { data, pending } = await useFetch(url, { params: { q: q } });
+    if (data.value.results.length) {
+      results.value = data.value;
+    } else {
+      onEnterKey();
+      close();
+    }
+    //console.log(results);
+  };
 
-  console.log(isOpen.value);
+  const onSearch = (e) => {
+    const q = e.target.value;
+    selectIndex.value = 0;
+    fetchData(q);
+  };
+
+  const selectedText = computed(() =>
+    initialize.value && initialize.value.text
+      ? initialize.value.text
+      : "Escribir Algooo"
+  );
 </script>
 <template>
   <div class="relative block bg-white" :class="[isOpen ? ' border-b-0' : '']">
     <div class="relative">
       <div
-        class="bg-white pt-2 pb-1 px-3 border border-gray-100 shadow cursor-pointer select-none flex justify-between text-base "
+        class="bg-white pt-2 pb-1 px-3 border border-gray-100 shadow cursor-pointer select-none flex justify-between text-base"
         :tabindex="tabindex"
         ref="toggle"
         @click="onToggle"
         @keydown="onKey"
       >
-        {{selectedText}}
+        {{ selectedText }}
       </div>
 
       <div
@@ -106,22 +127,23 @@
             autocomplete="off"
             ref="search"
             @blur="onBlur"
+            @input="onSearch"
             @keydown.esc="onEsc"
-              @keydown.up="onUpKey"
-              @keydown.down="onDownKey"
-              @keydown.enter="onEnterKey"
-              @keyup.enter="onEnterKey"
+            @keydown.up="onUpKey"
+            @keydown.down="onDownKey"
+            @keydown.enter="onEnterKey"
+            @keyup.enter="onEnterKey"
           />
         </div>
         <ul class="block p-1">
-          <li class="block mb-[2px]" v-for="(result, index) in results">
+          <li class="block mb-[2px]" v-for="(result, index) in results.results">
             <a
-              class="cursor-pointer block p-2 bg-white rounded-sm"
-              :class="selectIndex === index ? 'bg-gray-500 text-white' : ''"
+              class="cursor-pointer block text-white p-2 bg-gray-500 rounded-sm"
+              :class="selectIndex === index ? 'bg-slate-800' : ''"
               @mousedown.prevent="select(result)"
               @mouseover.prevent="onMouse(index)"
             >
-              {{ result }}
+              {{ result.text }}
             </a>
           </li>
         </ul>

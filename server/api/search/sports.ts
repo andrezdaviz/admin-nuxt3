@@ -1,8 +1,13 @@
 import Sport from "../../models/Sport";
 
 export default defineEventHandler(async (e) => {
-  const result = await Sport.find();
+  const { q } = useQuery(e);
+  const query = q || "";
+  const results = await Sport.find({
+    sport: { $regex: ".*" + query + ".*", $options: "i" },
+  }).limit(5);
+
   return {
-    result,
+    results,
   };
 });
