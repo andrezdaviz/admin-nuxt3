@@ -1,26 +1,18 @@
 <script setup>
 
-
-  const results = ["uno", "dos", "tres"];
   const selectIndex = ref(-1);
   const isOpen = ref(false);
   const selected = ref(null)
 
   const search = ref(null);
 
-  const {items} = defineProps({
+  const props = defineProps({
     items:{
         type: Array,
-        required: true
+        default: () => []
     }
   })
 
-  const {initialize, tabindex} = defineProps({
-    initialize: {
-      default: null
-    },
-    tabindex: { default: 0 },
-  });
 
   const onToggle = () => {
     console.log("aqui estoy");
@@ -121,14 +113,14 @@
           />
         </div>
         <ul class="block p-1">
-          <li class="block mb-[2px]" v-for="(result, index) in results">
+          <li class="block mb-[2px]" v-for="(item, index) in items">
             <a
               class="block p-2 bg-white rounded-sm cursor-pointer"
               :class="selectIndex === index ? 'bg-gray-500 text-white' : ''"
               @mousedown.prevent="select(result)"
               @mouseover.prevent="onMouse(index)"
             >
-              {{ result }}
+              {{ item }}
             </a>
           </li>
         </ul>
