@@ -3,5 +3,5 @@ import { connectDB } from "./db";
 
 export default (_nitroApp: Nitro) => {
   //run your connect code here
-  connectDB();
+  //connectDB();
 };

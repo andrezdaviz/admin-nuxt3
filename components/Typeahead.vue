@@ -107,7 +107,7 @@
   >
     <div class="relative">
       <div
-        class="flex justify-between px-3 py-2 text-white border-b-2 border-gray-500 rounded shadow cursor-pointer select-none bg-slate-600 text-semibold"
+        class="flex justify-between px-3 py-2 text-white shadow cursor-pointer select-none bg-slate-600 text-semibold"
         :tabindex="tabindex"
         ref="toggle"
         @click="onToggle"
