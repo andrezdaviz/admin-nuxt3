@@ -2,6 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
-    @apply bg-slate-800
+body {
+  @apply text-gray-200 bg-gray-700;
 }
