@@ -18,7 +18,6 @@ export default defineNuxtConfig({
     plugins: ["@/server/index.ts"],
   },
 
-  buildModules: ["@pinia/nuxt"],
   build: {
     postcss: {
       postcssOptions: {
@@ -29,7 +28,7 @@ export default defineNuxtConfig({
       },
     },
   },
-  css: ["@/assets/index.css"],
+  css: ["@/assets/index.css", "@fortawesome/fontawesome-svg-core/styles.css"],
 
   typescript: {
     tsConfig: {
