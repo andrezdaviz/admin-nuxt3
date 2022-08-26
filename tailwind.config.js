@@ -6,7 +6,17 @@ module.exports = {
     "./plugins/**/*.{js,ts}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        poppins: "'Poppins', serif",
+      },
+      colors: {
+        bg: "#23282E",
+        fg: "#2C3239",
+        sl: "#15191C",
+        secondary: "#505C68",
+      },
+    },
   },
   plugins: [],
 };

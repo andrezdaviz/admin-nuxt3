@@ -23,7 +23,7 @@
   ]);
 </script>
 <template>
-  <nav class="h-screen col-span-1">
+  <nav class="h-screen col-span-2">
     <div
       class="flex items-center justify-center gap-3 mt-4 drop-shadow-[1px_1px_1px_rgba(255,255,255,0.25)]"
     >
@@ -37,11 +37,11 @@
         v-for="link in navLinks"
         :key="link.link"
         :to="link.link"
-        class="relative flex items-center w-full h-12 gap-6 font-medium transition-all ease-in-out delay-300 rounded text-slate-400"
+        class="relative flex items-center w-full h-12 gap-6 font-medium transition-all duration-300 ease-in-out rounded"
         :class="
           link.link == $route.path
-            ? `text-slate-100 delay-100 bg-slate-600 before:w-1 before:content-[''] before:bg-slate-900 before:h-1/2 before:rounded ml-0`
-            : 'group ml-6'
+            ? ` delay-100  bg-fg before:w-1 before:content-[''] before:bg-blue-500 before:h-1/2 before:rounded ml-0`
+            : 'group ml-6 text-secondary'
         "
       >
         <client-only>

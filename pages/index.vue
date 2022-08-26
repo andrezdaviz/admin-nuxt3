@@ -27,7 +27,7 @@
   <div>
     <div class="grid grid-cols-4 gap-4">
       <div
-        class="col-span-1 p-3 transition-all ease-in delay-300 rounded-lg shadow-lg bg-slate-600 hover:shadow-none"
+        class="col-span-1 p-3 transition-all ease-in delay-300 rounded-lg shadow-lg bg-fg hover:shadow-none"
         v-for="item in insights"
       >
         <client-only>
@@ -43,28 +43,30 @@
           </div>
         </div>
         <hr class="h-1 mt-4 text-gray-100" />
-        <small class="block mt-2">Ultimas 24 Horas</small>
+        <small class="block mt-2 text-xs">Ultimas 24 Horas</small>
       </div>
     </div>
     <div class="mt-7">
-      <h2 class="mb-3">Pagos Recientes</h2>
-      <table
-        class="w-full p-6 text-center rounded-lg shadow-lg bg-slate-600 hover:shadow-none"
-      >
-        <thead class="divide-y divide-gray-400">
-          <tr class="odd:h-10 even:h-10">
+      <h2 class="mb-3 text-xl font-semibold">Pagos Recientes</h2>
+
+      <table class="w-full text-center">
+        <thead>
+          <tr class="odd:h-11 even:h-11">
             <th>Usuario</th>
             <th>Cantidad</th>
             <th>Metodo</th>
             <th>Estado</th>
           </tr>
         </thead>
-        <tbody class="divide-y divide-gray-400">
-          <tr v-for="item in 10" class="odd:h-10 even:h-10">
-            <td>{{ `Usuario ${item}` }}</td>
-            <td>16514651</td>
+        <tbody>
+          <tr
+            v-for="item in 10"
+            class="rounded-lg odd:h-11 even:h-11 odd:bg-fg"
+          >
+            <td class="rounded-l-lg">{{ `Usuario ${item}` }}</td>
+            <td class="text-right">16514651</td>
             <td>Paypal</td>
-            <td>Completed</td>
+            <td class="rounded-r-lg">Completed</td>
           </tr>
         </tbody>
       </table>

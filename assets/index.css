@@ -1,7 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply text-gray-200 bg-gray-700;
+@layer base {
+  body {
+    @apply text-white bg-bg;
+  }
 }
