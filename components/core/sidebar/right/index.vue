@@ -11,7 +11,9 @@
       </div>
       <div class="flex items-center text-green-500">
         <span class="text-lg">1234564841</span>
-        <font-icon class="ml-1 text-xs" :icon="['fas', 'arrow-up']" />
+        <client-only>
+          <font-icon class="ml-1 text-xs" :icon="['fas', 'arrow-up']" />
+        </client-only>
       </div>
     </div>
   </nav>

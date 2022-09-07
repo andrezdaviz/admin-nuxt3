@@ -38,4 +38,10 @@ export default defineNuxtConfig({
       },
     },
   },
+
+  vite: {
+    ssr: {
+      noExternal: ["@heroicons/vue"],
+    },
+  },
 });
