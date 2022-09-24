@@ -14,7 +14,7 @@ class TeamsItem {
   @prop({ ref: () => Team })
   team: Ref<Team>;
 
-  @prop()
+  @prop({ type: Number })
   odd: number;
 }
 
@@ -28,13 +28,13 @@ class Event {
   @prop({ type: () => TeamsItem })
   teams: TeamsItem[];
 
-  @prop()
+  @prop({ type: () => League })
   league: Ref<League>;
 
-  @prop()
+  @prop({ type: Date })
   timestamp: Date;
 
-  @prop()
+  @prop({ type: Number })
   oddDraw: number;
 }
 

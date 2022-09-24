@@ -23,7 +23,7 @@
   ]);
 </script>
 <template>
-  <nav class="h-screen col-span-2">
+  <nav class="h-screen">
     <div
       class="flex items-center justify-center gap-3 mt-4 drop-shadow-[1px_1px_1px_rgba(255,255,255,0.25)]"
     >

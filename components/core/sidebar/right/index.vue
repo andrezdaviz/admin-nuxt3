@@ -1,5 +1,5 @@
 <template>
-  <nav class="h-screen col-span-3">
+  <nav class="h-screen">
     <div
       class="flex items-end justify-between w-full gap-4 p-6 mt-4 font-semibold rounded-lg bg-fg"
     >
