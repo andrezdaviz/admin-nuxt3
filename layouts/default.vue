@@ -1,7 +1,7 @@
 <template>
-  <div class="w-[96%] grid grid-cols-12 gap-6 mx-auto my-0">
+  <div class="w-full px-4 grid grid-cols-[270px_auto_340px] gap-4 mx-auto my-0">
     <CoreSidebar></CoreSidebar>
-    <main class="col-span-7 mt-5">
+    <main class="mt-5">
       <slot />
     </main>
     <core-sidebar-right />

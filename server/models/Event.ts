@@ -1,8 +1,10 @@
-import typegoose, { Ref } from "@typegoose/typegoose";
+import typegoose, { PropType, Ref } from "@typegoose/typegoose";
+
+const { getModelForClass, prop, modelOptions } = typegoose;
 import { Team } from "./Team";
 import { League } from "./League";
 
-const { getModelForClass, prop, modelOptions } = typegoose;
+//const { getModelForClass, prop, modelOptions , Ref} = typegoose;
 
 @modelOptions({
   schemaOptions: {
@@ -10,11 +12,11 @@ const { getModelForClass, prop, modelOptions } = typegoose;
     versionKey: false,
   },
 })
-class TeamsItem {
+class Item {
   @prop({ ref: () => Team })
-  team: Ref<Team>;
+  team_id: Ref<Team>;
 
-  @prop()
+  @prop({ type: Number })
   odd: number;
 }
 
@@ -25,16 +27,16 @@ class TeamsItem {
   },
 })
 class Event {
-  @prop({ type: () => TeamsItem })
-  teams: TeamsItem[];
+  @prop({ type: () => Item }, PropType.ARRAY)
+  teams: Item[];
 
-  @prop()
-  league: Ref<League>;
+  @prop({ ref: () => League })
+  league_id: Ref<League>;
 
-  @prop()
+  @prop({ type: Date })
   timestamp: Date;
 
-  @prop()
+  @prop({ type: Number })
   oddDraw: number;
 }
 

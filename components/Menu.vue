@@ -1,6 +1,6 @@
 <template>
   <div class="w-56 text-right">
-    <Menu as="div" class="relative inline-block text-left">
+    <Menu as="div" class="relative z-50 inline-block text-left">
       <div>
         <MenuButton
           class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-white rounded-md bg-fg bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"

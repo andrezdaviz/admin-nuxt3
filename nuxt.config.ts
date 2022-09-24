@@ -35,6 +35,8 @@ export default defineNuxtConfig({
       compilerOptions: {
         experimentalDecorators: true,
         emitDecoratorMetadata: true,
+        esModuleInterop: true,
+        target: "es6",
       },
     },
   },
