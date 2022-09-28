@@ -7,6 +7,7 @@ export default defineEventHandler(async (e) => {
       populate: { path: "team_id" },
     })
     .populate("league_id");
+
   return {
     results,
   };

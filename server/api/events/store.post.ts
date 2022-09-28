@@ -2,6 +2,7 @@ import Event from "../../models/Event";
 
 export default defineEventHandler(async (event) => {
   const form = await useBody(event);
+
   const { league_id, date, time, oddDraw, teams } = form;
 
   const newEvent = await new Event({
